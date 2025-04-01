@@ -1,54 +1,194 @@
+:root {
+  --background-color-light: #E2D7F3;
+  --text-color-light: #333;
+  --secondary-text-color-light: #555;
+  --link-color-light: #555;
+  --link-hover-color-light: #0077b5;
+  --icon-color-light: #333; /* 라이트 모드 아이콘 색상 */
+
+  --background-color-dark: #221f27; /* 어두운 보라색 계열 */
+  --text-color-dark: #f0e6ff; /* 밝은 보라색/흰색 계열 */
+  --secondary-text-color-dark: #b8a9d1; /* 중간 밝기 보라색 */
+  --link-color-dark: #b8a9d1;
+  --link-hover-color-dark: #d9c8f8; /* 더 밝은 보라색 */
+  --icon-color-dark: #f0e6ff; /* 다크 모드 아이콘 색상 */
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Arial', sans-serif; 
-    background-color: #E2D7F3; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .eczar-bold {
-    font-family: "Eczar", serif;
-    font-optical-sizing: auto;
-    font-weight: 800; /* Bold */
-    font-style: normal;
-  }
-  
-  .eczar-regular {
-    font-family: "Eczar", serif;
-    font-optical-sizing: auto;
-    font-weight: 400; /* Regular */
-    font-style: normal;
-  }
-  
-  .container {
-    text-align: center;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  position: relative; /* 다크 모드 버튼 위치 지정을 위해 */
+  padding: 20px; /* 화면 가장자리에 여백 추가 */
+}
+
+/* 다크 모드 스타일 */
+body.dark-mode {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+.eczar-bold {
+  font-family: "Eczar", serif;
+  font-optical-sizing: auto;
+  font-weight: 800; /* Bold */
+  font-style: normal;
+}
+
+.eczar-regular {
+  font-family: "Eczar", serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+.container {
+  text-align: center;
+  max-width: 90%; /* 내용이 너무 넓어지지 않도록 제한 */
+}
+
+h1 {
+  font-size: 48px; /* 기본 글자 크기 */
+  word-break: keep-all; /* 단어 중간 줄바꿈 방지 */
+}
+
+p {
+  font-size: 18px; /* 기본 글자 크기 */
+  margin-bottom: 30px;
+  color: var(--secondary-text-color-light);
+}
+
+body.dark-mode p {
+  color: var(--secondary-text-color-dark);
+}
+
+.social-links a {
+  margin: 0 10px;
+  font-size: 32px; /* 기본 아이콘 크기 */
+  color: var(--link-color-light);
+  text-decoration: none;
+}
+
+body.dark-mode .social-links a {
+  color: var(--link-color-dark);
+}
+
+.social-links a:hover {
+  color: var(--link-hover-color-light);
+}
+
+body.dark-mode .social-links a:hover {
+  color: var(--link-hover-color-dark);
+}
+
+/* 다크 모드 토글 버튼 스타일 */
+.theme-switch-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* 테마 아이콘 스타일 */
+#theme-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  color: var(--icon-color-light);
+  transition: color 0.3s ease;
+}
+
+body.dark-mode #theme-icon {
+  color: var(--icon-color-dark);
+}
+
+
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #5a4277;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* --- 반응형 디자인 --- */
+/* 화면 너비가 600px 이하일 때 적용될 스타일 */
+@media (max-width: 600px) {
   h1 {
-    font-size: 48px;
+      font-size: 36px; /* 작은 화면에서 제목 글자 크기 줄임 */
   }
-  
+
   p {
-    font-size: 18px;
-    margin-bottom: 30px;
-    color: #555;
+      font-size: 16px; /* 작은 화면에서 문단 글자 크기 줄임 */
   }
 
   .social-links a {
-    margin: 0 10px;
-    font-size: 32px;
-    color: #555;
-    text-decoration: none;
+      font-size: 28px; /* 작은 화면에서 소셜 링크 아이콘 크기 줄임 */
+      margin: 0 8px; /* 아이콘 간격 약간 줄임 */
   }
-  
-  .social-links a:hover {
-    color: #0077b5;
+
+  .theme-switch-wrapper {
+      top: 15px; /* 상단 여백 조정 */
+      right: 15px; /* 우측 여백 조정 */
   }
+}
+
+/* 화면 너비가 400px 이하일 때 추가 조정 */
+@media (max-width: 400px) {
+  h1 {
+      font-size: 28px; /* 더 작은 화면에서 제목 글자 크기 더 줄임 */
+  }
+   p {
+      font-size: 14px;
+   }
+  .social-links a {
+      font-size: 24px;
+  }
+}
