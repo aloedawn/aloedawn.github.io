@@ -3,6 +3,7 @@ const description = "Hanyang University (2020.3 ~) | Interested in Graphics & AI
 const twitterUrl = "https://x.com/yutari01";
 const githubUrl = "https://github.com/yutari01";
 const blogUrl = "https://blog.yutari.io";
+const discordUrl = "https://discord.com/invite/p3RtdG5Kj4";
 const faviconUrl = "https://minotar.net/helm/68cf9063aa854545b0c0e922eeb28fef/512.png";
 
 // DOM Elements
@@ -11,6 +12,7 @@ const descriptionElement = document.getElementById("description");
 const twitterLink = document.getElementById("twitter");
 const githubLink = document.getElementById("github");
 const blogLink = document.getElementById("blog");
+const discordLink = document.getElementById("discord");
 const themeToggle = document.getElementById('checkbox');
 const bodyElement = document.body;
 const themeIcon = document.getElementById('theme-icon'); // 아이콘 요소 가져오기
@@ -21,6 +23,7 @@ descriptionElement.innerText = description;
 twitterLink.href = twitterUrl;
 githubLink.href = githubUrl;
 blogLink.href = blogUrl;
+discordLink.href = discordUrl;
 
 // Set favicon
 let link = document.createElement('link');
