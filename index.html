@@ -1,36 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YUT4R1 | 🫠 Noob developer</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&display=swap" rel="stylesheet">
-  <!-- Font Awesome icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <div class="theme-switch-wrapper">
-      <i id="theme-icon" class="fas"></i>
-      <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-      </label>
-  </div>
+<html lang="ko">
 
-  <div class="container">
-      <h1 id="name" class="eczar-bold"></h1>
-      <p id="description" class="eczar-regular"></p>
-      <div class="social-links">
-          <a id="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a id="github" target="_blank"><i class="fab fa-github"></i></a>
-          <a id="blog" target="_blank"><i class="fa-solid fa-newspaper"></i></a>
-          <a id="discord" target="_blank"><i class="fab fa-discord"></i></a>
-      </div>
-  </div>
-  <script src="js/script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALOEDAWN | Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo"><span class="logo-accent">{</span>AloeDawn<span class="logo-accent">};</span></div>
+            <div class="nav-group">
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Project</a></li>
+                        <li><a href="#activity">Activity</a></li>
+                        <li><a href="#skill">Skill</a></li>
+                    </ul>
+                </nav>
+                <a href="#contact" class="btn-contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>안녕하세요<br><span id="typing-text"></span><span class="cursor">|</span></h1>
+                <p class="subtitle">내 손안의 가능성을 믿습니다.</p>
+                <a href="#" class="btn-primary">CV 다운로드</a>
+            </div>
+            <div class="hero-image">
+                <!-- Placeholder for Avatar -->
+                <div class="avatar-placeholder">
+                    <img src="profile.png" alt="Avatar">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about-me" class="section">
+        <div class="container">
+            <div class="about-content">
+                <h2>저는 이런 사람이에요.</h2>
+                <p>
+                    어릴 때 부터 컴퓨터와 소프트웨어에 관심이 많아 프로그래밍 공부를 시작 했어요.<br>
+                    주도적으로 자신의 학습 여정을 계획하고 실천할 수 있어요.<br>
+                    실패에서도 새로운 배움을 발견하고 다시 도전하는 열정이 있어요.<br>
+                    AI의 변화속에서 꾸준히 노력할 수 있어요.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Project 1">
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Project 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>VoD 콘텐츠의 매력도 검증</h3>
+                        <p>SK 브로드밴드 사내에서 사용하고자 하는 VoD 콘텐츠의 매력도(사용자에게 추천 할 만 한가)에 대한 자동화된 검증 솔루션을 만들고자 했습니다.</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300" alt="Project 3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activity" class="section">
+        <div class="container">
+            <h2 class="section-title">Activities</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>인천진산과학고등학교 졸업</h3>
+                        <p>2020년 2월</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>한양대학교 컴퓨터소프트웨어학부 입학</h3>
+                        <p>2020년 3월</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>학부 학생회 '드림' 홍보부</h3>
+                        <p>2020년 3월 - 2021년 2월</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>학부 비상대책위원회 위원활동</h3>
+                        <p>2021년 3월 - 2021년 6월</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>기계화학교 통신병 복무</h3>
+                        <p>2021년 8월 - 2023년 2월</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>웅진프라임 송도학원 멘토링선생님</h3>
+                        <p>2023년 3월 - 2023년 10월</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>SK mySUNI 써니C 4기</h3>
+                        <p>2025년 6월 - 2025년 8월</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>한양대학교 졸업예정</h3>
+                        <p>2026년 2월</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skill" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+
+            <div class="skills-grid">
+                <div class="skills-category">
+                    <h3>Programming</h3>
+                    <div class="skill-pills">
+                        <span class="pill">C++/Kotlin/Python</span>
+                        <span class="pill">Prompt Engineering</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Tools</h3>
+                    <div class="skill-pills">
+                        <span class="pill">Figma</span>
+                        <span class="pill">XCode/Intelij/VSCode/AntiGravity</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Language</h3>
+                    <div class="skill-pills">
+                        <span class="pill">Korean</span>
+                        <span class="pill">English</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-grid">
+                <a href="mailto:yutae@aloedawn.com" class="contact-card">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info">
+                        <span class="label">Email</span>
+                        <span class="value">yutae@aloedawn.com</span>
+                    </div>
+                </a>
+                <a href="#" class="contact-card">
+                    <div class="icon"><i class="fab fa-twitter"></i></div>
+                    <div class="info">
+                        <span class="label">X(Twitter)</span>
+                        <span class="value">@aloedawn</span>
+                    </div>
+                </a>
+                <a href="#" class="contact-card">
+                    <div class="icon"><i class="fab fa-github"></i></div>
+                    <div class="info">
+                        <span class="label">Github</span>
+                        <span class="value">@aloedawn</span>
+                    </div>
+                </a>
+                <a href="#" class="contact-card">
+                    <div class="icon"><i class="fab fa-youtube"></i></div>
+                    <div class="info">
+                        <span class="label">Youtube</span>
+                        <span class="value">@aloedawnYT</span>
+                    </div>
+                </a>
+                <a href="#" class="contact-card">
+                    <div class="icon"><i class="fab fa-linkedin"></i></div>
+                    <div class="info">
+                        <span class="label">Linkedin</span>
+                        <span class="value">@김유태</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>내 손안의 가능성을 믿습니다</p>
+            <p>&copy; 2025 AloeDawn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
+
 </html>

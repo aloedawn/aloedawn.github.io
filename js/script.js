@@ -1,84 +1,90 @@
-const name = "YUT4RI";
-const description = "Hanyang University (2020.3 ~) | Interested in Graphics & AI";
-const twitterUrl = "https://x.com/yutari01";
-const githubUrl = "https://github.com/yutari01";
-const blogUrl = "https://blog.yutari.io";
-const discordUrl = "https://discord.com/invite/p3RtdG5Kj4";
-const faviconUrl = "https://minotar.net/helm/68cf9063aa854545b0c0e922eeb28fef/512.png";
+// Typing Animation
+const typingText = document.getElementById('typing-text');
+const texts = [
+    { full: '알로에새벽입니다.', gradientEnd: 5 }, // "알로에새벽" = 5 characters
+    { full: '개발자입니다.', gradientEnd: 3 }      // "개발자" = 3 characters
+];
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
 
-// DOM Elements
-const nameElement = document.getElementById("name");
-const descriptionElement = document.getElementById("description");
-const twitterLink = document.getElementById("twitter");
-const githubLink = document.getElementById("github");
-const blogLink = document.getElementById("blog");
-const discordLink = document.getElementById("discord");
-const themeToggle = document.getElementById('checkbox');
-const bodyElement = document.body;
-const themeIcon = document.getElementById('theme-icon'); // 아이콘 요소 가져오기
+function typeAnimation() {
+    const currentTextObj = texts[textIndex];
+    const currentText = currentTextObj.full;
+    const gradientEnd = currentTextObj.gradientEnd;
 
-// Set initial content
-nameElement.innerText = `Hello, I'm ${name}`;
-descriptionElement.innerText = description;
-twitterLink.href = twitterUrl;
-githubLink.href = githubUrl;
-blogLink.href = blogUrl;
-discordLink.href = discordUrl;
+    if (!isDeleting) {
+        // Typing
+        const typedText = currentText.substring(0, charIndex + 1);
 
-// Set favicon
-let link = document.createElement('link');
-link.rel = 'icon';
-link.href = faviconUrl;
-document.head.appendChild(link);
+        // Split text into gradient part and normal part
+        const gradientPart = typedText.substring(0, Math.min(typedText.length, gradientEnd));
+        const normalPart = typedText.substring(gradientEnd);
 
-// --- Dark Mode Logic ---
+        typingText.innerHTML = `<span class="gradient-text">${gradientPart}</span>${normalPart}`;
+        charIndex++;
 
-// Function to apply the theme and update the icon
-function applyTheme(isDarkMode) {
-    if (isDarkMode) {
-        bodyElement.classList.add('dark-mode');
-        themeToggle.checked = true; // Update toggle state
-        themeIcon.classList.remove('fa-sun'); // 해 아이콘 제거
-        themeIcon.classList.add('fa-moon');   // 달 아이콘 추가
+        if (charIndex === currentText.length) {
+            // Finished typing, wait 2.5 seconds then start deleting
+            setTimeout(() => {
+                isDeleting = true;
+                typeAnimation();
+            }, 2500);
+            return;
+        }
+
+        // Type next character after 100ms
+        setTimeout(typeAnimation, 100);
     } else {
-        bodyElement.classList.remove('dark-mode');
-        themeToggle.checked = false; // Update toggle state
-        themeIcon.classList.remove('fa-moon'); // 달 아이콘 제거
-        themeIcon.classList.add('fa-sun');    // 해 아이콘 추가
+        // Deleting
+        const typedText = currentText.substring(0, charIndex - 1);
+
+        // Split text into gradient part and normal part
+        const gradientPart = typedText.substring(0, Math.min(typedText.length, gradientEnd));
+        const normalPart = typedText.substring(gradientEnd);
+
+        typingText.innerHTML = `<span class="gradient-text">${gradientPart}</span>${normalPart}`;
+        charIndex--;
+
+        if (charIndex === 0) {
+            // Finished deleting, move to next text
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(typeAnimation, 200);
+            return;
+        }
+
+        // Delete next character after 50ms (faster than typing)
+        setTimeout(typeAnimation, 50);
     }
 }
 
-// Check localStorage for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-// Check system preference if no saved theme
-const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+// Start typing animation
+typeAnimation();
 
-// Determine initial theme
-let isDarkMode = false;
-if (savedTheme === 'dark') {
-    isDarkMode = true;
-} else if (savedTheme === 'light') {
-    isDarkMode = false;
-} else {
-    // If no saved theme, use system preference
-    isDarkMode = prefersDarkScheme.matches;
-}
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
 
-// Apply the initial theme and set the initial icon
-applyTheme(isDarkMode);
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
 
-// Event listener for the toggle switch
-themeToggle.addEventListener('change', () => {
-    const isChecked = themeToggle.checked;
-    applyTheme(isChecked);
-    // Save the preference to localStorage
-    localStorage.setItem('theme', isChecked ? 'dark' : 'light');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
 });
 
-// Listen for changes in system preference (optional but good practice)
-prefersDarkScheme.addEventListener('change', (e) => {
-    // Only change theme if no user preference is saved
-    if (!localStorage.getItem('theme')) {
-        applyTheme(e.matches);
+// Add scroll event listener for header liquid glass effect
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
     }
 });
