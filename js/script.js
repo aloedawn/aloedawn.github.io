@@ -1,90 +1,101 @@
+// ========================================
 // Typing Animation
+// ========================================
 const typingText = document.getElementById('typing-text');
 const texts = [
-    { full: '알로에새벽입니다.', gradientEnd: 5 }, // "알로에새벽" = 5 characters
-    { full: '개발자입니다.', gradientEnd: 3 }      // "개발자" = 3 characters
+    { full: 'AloeDawn입니다.', gradientEnd: 8 },
+    { full: '개발자입니다.', gradientEnd: 3 },
+    { full: 'AI 애호가입니다.', gradientEnd: 6 }
 ];
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
 
+function renderTypedText(text, gradientEnd) {
+    const gradientPart = text.substring(0, Math.min(text.length, gradientEnd));
+    const normalPart = text.substring(gradientEnd);
+    typingText.innerHTML = `<span class="gradient-text">${gradientPart}</span>${normalPart}`;
+}
+
 function typeAnimation() {
-    const currentTextObj = texts[textIndex];
-    const currentText = currentTextObj.full;
-    const gradientEnd = currentTextObj.gradientEnd;
+    const { full: currentText, gradientEnd } = texts[textIndex];
 
     if (!isDeleting) {
-        // Typing
-        const typedText = currentText.substring(0, charIndex + 1);
-
-        // Split text into gradient part and normal part
-        const gradientPart = typedText.substring(0, Math.min(typedText.length, gradientEnd));
-        const normalPart = typedText.substring(gradientEnd);
-
-        typingText.innerHTML = `<span class="gradient-text">${gradientPart}</span>${normalPart}`;
         charIndex++;
+        renderTypedText(currentText.substring(0, charIndex), gradientEnd);
 
         if (charIndex === currentText.length) {
-            // Finished typing, wait 2.5 seconds then start deleting
-            setTimeout(() => {
-                isDeleting = true;
-                typeAnimation();
-            }, 2500);
+            setTimeout(() => { isDeleting = true; typeAnimation(); }, 2500);
             return;
         }
-
-        // Type next character after 100ms
         setTimeout(typeAnimation, 100);
     } else {
-        // Deleting
-        const typedText = currentText.substring(0, charIndex - 1);
-
-        // Split text into gradient part and normal part
-        const gradientPart = typedText.substring(0, Math.min(typedText.length, gradientEnd));
-        const normalPart = typedText.substring(gradientEnd);
-
-        typingText.innerHTML = `<span class="gradient-text">${gradientPart}</span>${normalPart}`;
         charIndex--;
+        renderTypedText(currentText.substring(0, charIndex), gradientEnd);
 
         if (charIndex === 0) {
-            // Finished deleting, move to next text
             isDeleting = false;
             textIndex = (textIndex + 1) % texts.length;
-            setTimeout(typeAnimation, 200);
+            setTimeout(typeAnimation, 300);
             return;
         }
-
-        // Delete next character after 50ms (faster than typing)
         setTimeout(typeAnimation, 50);
     }
 }
 
-// Start typing animation
 typeAnimation();
 
-// Smooth scrolling for navigation links
+// ========================================
+// Scroll-Triggered Reveal Animations
+// (Apple Keynote-style stagger reveal)
+// ========================================
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -60px 0px'
+});
+
+document.querySelectorAll('.reveal, .reveal-scale').forEach(el => {
+    revealObserver.observe(el);
+});
+
+// ========================================
+// Smooth Scrolling for Navigation Links
+// ========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
 
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
+            e.preventDefault();
+            targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
-// Add scroll event listener for header liquid glass effect
+// ========================================
+// Header — Translucent on Scroll
+// ========================================
 const header = document.querySelector('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+let lastScrolled = false;
+
+function onScroll() {
+    const isScrolled = window.scrollY > 20;
+    if (isScrolled !== lastScrolled) {
+        header.classList.toggle('scrolled', isScrolled);
+        lastScrolled = isScrolled;
     }
-});
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// Trigger on load in case page is already scrolled
+onScroll();
